@@ -1,0 +1,14 @@
+﻿  test.c
+E:\代码\VS\List\List\test.c(32,22): warning C4047: “函数”:“SListNode *”与“SListNode **”的间接级别不同
+E:\代码\VS\List\List\test.c(32,16): warning C4024: “SListPopFront”: 形参和实参 1 的类型不同
+E:\代码\VS\List\List\test.c(33,22): warning C4047: “函数”:“SListNode *”与“SListNode **”的间接级别不同
+E:\代码\VS\List\List\test.c(33,16): warning C4024: “SListPopFront”: 形参和实参 1 的类型不同
+E:\代码\VS\List\List\test.c(34,22): warning C4047: “函数”:“SListNode *”与“SListNode **”的间接级别不同
+E:\代码\VS\List\List\test.c(34,16): warning C4024: “SListPopFront”: 形参和实参 1 的类型不同
+E:\代码\VS\List\List\test.c(35,22): warning C4047: “函数”:“SListNode *”与“SListNode **”的间接级别不同
+E:\代码\VS\List\List\test.c(35,16): warning C4024: “SListPopFront”: 形参和实参 1 的类型不同
+E:\代码\VS\List\List\test.c(36,22): warning C4047: “函数”:“SListNode *”与“SListNode **”的间接级别不同
+E:\代码\VS\List\List\test.c(36,16): warning C4024: “SListPopFront”: 形参和实参 1 的类型不同
+E:\代码\VS\List\List\test.c(37,22): warning C4047: “函数”:“SListNode *”与“SListNode **”的间接级别不同
+E:\代码\VS\List\List\test.c(37,16): warning C4024: “SListPopFront”: 形参和实参 1 的类型不同
+  List.vcxproj -> E:\代码\VS\List\Debug\List.exe
