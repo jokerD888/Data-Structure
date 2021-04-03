@@ -100,22 +100,54 @@ struct ListNode* FindKthToTail(struct ListNode* pListHead, int k)
 //解法，新建链表取小结点下来尾插 
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2) 
 {
+    //if (l1 == NULL)
+    //    return l2;
+    //if (l2 == NULL)
+    //    return l1;
+
+    //struct ListNode* head = l1, * tail = NULL;
+    //if (l1->val < l2->val)
+    //{
+    //    head = tail = l1;
+    //    l1 = l1->next;
+    //}
+    //else
+    //{
+    //    head = tail = l2;
+    //    l2 = l2->next;
+    //}
+
+    ////取小尾插
+    //while (l1 && l2)
+    //{
+    //    if (l1->val < l2->val)
+    //    {
+    //        tail->next = l1;
+    //        l1 = l1->next;
+    //    }
+    //    else
+    //    {
+    //        tail->next = l2;
+    //        l2 = l2->next;
+    //    }
+    //    tail = tail->next;
+    //}
+    //if (l1)
+    //    tail->next = l1;
+    //else
+    //    tail->next = l2;
+    //return head;
+
+    //或
+
     if (l1 == NULL)
         return l2;
     if (l2 == NULL)
         return l1;
 
+    //带哨兵位的头结点，它不储存有效数据，方便尾插
     struct ListNode* head = l1, * tail = NULL;
-    if (l1->val < l2->val)
-    {
-        head = tail = l1;
-        l1 = l1->next;
-    }
-    else
-    {
-        head = tail = l2;
-        l2 = l2->next;
-    }
+    head = tail = (struct ListNode*)malloc(sizeof(struct ListNode));
 
     //取小尾插
     while (l1 && l2)
@@ -136,7 +168,11 @@ struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2)
         tail->next = l1;
     else
         tail->next = l2;
-    return head;
+
+    //return head;
+    struct ListNode* realHead = head->next;
+    free(head);
+    return realHead;
 
 }
 

@@ -1,3 +1,5 @@
 ﻿  test.c
-E:\代码\VS\test_4_3\test_4_3\test.c(68,19): error C2011: “ListNode”:“struct”类型重定义
-E:\代码\VS\test_4_3\test_4_3\test.c(11): message : 参见“ListNode”的声明
+E:\代码\Data-Structure\List-exercises\test_4_3\test_4_3\test.c(68,19): error C2011: “ListNode”:“struct”类型重定义
+E:\代码\Data-Structure\List-exercises\test_4_3\test_4_3\test.c(11): message : 参见“ListNode”的声明
+E:\代码\Data-Structure\List-exercises\test_4_3\test_4_3\test.c(150,43): warning C4013: “malloc”未定义；假设外部返回 int
+E:\代码\Data-Structure\List-exercises\test_4_3\test_4_3\test.c(174,9): warning C4013: “free”未定义；假设外部返回 int
