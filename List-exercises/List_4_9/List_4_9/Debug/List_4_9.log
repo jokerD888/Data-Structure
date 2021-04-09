@@ -1,5 +1,6 @@
 ﻿  test.c
-E:\代码\VS\List_4_9\List_4_9\test.c(63,18): error C2084: 函数“ListNode *getIntersectionNode(ListNode *,ListNode *)”已有主体
-E:\代码\VS\List_4_9\List_4_9\test.c(11): message : 参见“getIntersectionNode”的前一个定义
-E:\代码\VS\List_4_9\List_4_9\test.c(82,31): error C2065: “head”: 未声明的标识符
-E:\代码\VS\List_4_9\List_4_9\test.c(82,1): warning C4047: “初始化”:“ListNode *”与“int”的间接级别不同
+E:\代码\Data-Structure\List-exercises\List_4_9\List_4_9\test.c(64,18): error C2084: 函数“ListNode *getIntersectionNode(ListNode *,ListNode *)”已有主体
+E:\代码\Data-Structure\List-exercises\List_4_9\List_4_9\test.c(11): message : 参见“getIntersectionNode”的前一个定义
+E:\代码\Data-Structure\List-exercises\List_4_9\List_4_9\test.c(90,18): warning C4013: “abs”未定义；假设外部返回 int
+E:\代码\Data-Structure\List-exercises\List_4_9\List_4_9\test.c(199,18): error C2084: 函数“ListNode *detectCycle(ListNode *)”已有主体
+E:\代码\Data-Structure\List-exercises\List_4_9\List_4_9\test.c(131): message : 参见“detectCycle”的前一个定义

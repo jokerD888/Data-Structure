@@ -189,3 +189,36 @@ struct ListNode* detectCycle(struct ListNode* head)
 
     
 }
+
+
+//写起来简单，但需要公式，理解要复杂  
+//slow  L+X
+//fast  L+n*C+X
+// 2*(L+X)=L+n*C+X
+//L=n*C-X
+struct ListNode* detectCycle(struct ListNode* head)
+{
+    struct ListNode* slow, * fast;
+    slow = fast = head;
+    while (fast && fast->next)
+    {
+
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (fast == slow)
+            break;
+    }
+
+    if (fast == NULL || fast->next == NULL)
+        return NULL;
+
+    struct ListNode* meet = fast;
+    while (head != meet)
+    {
+        head = head->next;
+        meet = meet->next;
+    }
+
+    return meet;
+}
