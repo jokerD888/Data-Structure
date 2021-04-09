@@ -1,0 +1,5 @@
+﻿  test.c
+E:\代码\VS\List_4_9\List_4_9\test.c(63,18): error C2084: 函数“ListNode *getIntersectionNode(ListNode *,ListNode *)”已有主体
+E:\代码\VS\List_4_9\List_4_9\test.c(11): message : 参见“getIntersectionNode”的前一个定义
+E:\代码\VS\List_4_9\List_4_9\test.c(82,31): error C2065: “head”: 未声明的标识符
+E:\代码\VS\List_4_9\List_4_9\test.c(82,1): warning C4047: “初始化”:“ListNode *”与“int”的间接级别不同
