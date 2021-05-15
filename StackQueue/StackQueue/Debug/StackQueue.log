@@ -1,0 +1,4 @@
+﻿  test.c
+E:\代码\VS\StackQueue\StackQueue\stack.h(2,9): warning C4068: 未知的杂注“one”
+E:\代码\VS\StackQueue\StackQueue\Queue.h(2,9): warning C4068: 未知的杂注“one”
+  StackQueue.vcxproj -> E:\代码\VS\StackQueue\Debug\StackQueue.exe
