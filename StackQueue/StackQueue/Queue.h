@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #pragma one
-
+//队列，先进先出(头删）
+//适宜用链表
 #include<stdio.h>
 #include<stdbool.h>
 #include<assert.h>

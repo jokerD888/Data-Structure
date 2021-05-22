@@ -1,4 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
+//后进先出
+//适宜用数组
 #include"Stack.h"
 void StackInit(ST* ps)
 {
@@ -38,7 +40,7 @@ void StackPush(ST* ps, STDataType x)
 		else
 		{
 			ps->a = tmp;
-			ps->capacity*2;
+			ps->capacity*=2;
 		}
 
 	}

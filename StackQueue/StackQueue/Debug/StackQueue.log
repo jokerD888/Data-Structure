@@ -1,4 +1,18 @@
-﻿  test.c
+﻿  Queue.c
+E:\代码\VS\StackQueue\StackQueue\Queue.h(2,9): warning C4068: 未知的杂注“one”
+E:\代码\VS\StackQueue\StackQueue\Queue.c(17,7): warning C4013: “free”未定义；假设外部返回 int
+E:\代码\VS\StackQueue\StackQueue\Queue.c(28,25): warning C4013: “malloc”未定义；假设外部返回 int
+E:\代码\VS\StackQueue\StackQueue\Queue.c(32,7): warning C4013: “exit”未定义；假设外部返回 int
+E:\代码\VS\StackQueue\StackQueue\Queue.c(28,1): warning C4047: “初始化”:“QNode *”与“int”的间接级别不同
+  stack.c
+E:\代码\VS\StackQueue\StackQueue\Stack.h(2,9): warning C4068: 未知的杂注“one”
+E:\代码\VS\StackQueue\StackQueue\stack.c(8,29): warning C4013: “malloc”未定义；假设外部返回 int
+E:\代码\VS\StackQueue\StackQueue\stack.c(12,7): warning C4013: “exit”未定义；假设外部返回 int
+E:\代码\VS\StackQueue\StackQueue\stack.c(21,6): warning C4013: “free”未定义；假设外部返回 int
+E:\代码\VS\StackQueue\StackQueue\stack.c(34,41): warning C4013: “realloc”未定义；假设外部返回 int
+E:\代码\VS\StackQueue\StackQueue\stack.c(43,16): warning C4552: ”*“: 未使用表达式结果
+  test.c
 E:\代码\VS\StackQueue\StackQueue\stack.h(2,9): warning C4068: 未知的杂注“one”
 E:\代码\VS\StackQueue\StackQueue\Queue.h(2,9): warning C4068: 未知的杂注“one”
+  正在生成代码...
   StackQueue.vcxproj -> E:\代码\VS\StackQueue\Debug\StackQueue.exe
