@@ -1,7 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
-//Á·Ï°leetcode
-//ÓÐÐ§µÄÀ¨ºÅ£¬£¨À¨ºÅÆ¥Åä£©
 #include<stdio.h>
 #include<stdbool.h>
 #include<assert.h>
@@ -109,7 +107,8 @@ bool StackEmpty(ST* ps)
 
 
 
-
+//Á·Ï°leetcode
+//ÓÐÐ§µÄÀ¨ºÅ£¬£¨À¨ºÅÆ¥Åä£©
 bool isValid(char* s)
 {
 	ST st;
