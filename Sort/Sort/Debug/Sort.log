@@ -1,0 +1,4 @@
+﻿  Sort.c
+E:\代码\VS\Sort\Sort\stack.h(2,9): warning C4068: 未知的杂注“one”
+E:\代码\VS\Sort\Sort\Sort.c(592,15): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  Sort.vcxproj -> E:\代码\VS\Sort\Debug\Sort.exe
