@@ -316,4 +316,280 @@ public:
 		}
 		return minNode;
 	}
+	
+	//改进，采用手动调整堆
+	class NodeRecord {
+	public:
+		Node* node;
+		int distance;
+		NodeRecord(Node* node,int distance):node(node),distance(distance){}
+	};
+
+	class NodeHeap {
+	public:
+		NodeHeap(int cnt) {
+			nodes = vector<Node*>(cnt);
+			this->size = 0;
+		}
+
+		bool isEmpty() {
+			return size == 0;
+		}
+
+		void addOrUpdateOrIgnore(Node* node, int distance) {
+			if (inHeap(node)) {		//若在堆中，且有效
+				distanceMap[node] = min(distanceMap[node], distance);	//更新距离
+				insertHeapify(node, heapIndexMap[node]);	//调整堆，因更新后的值只会更小，所建堆又是小堆，所以只可能向上调整
+			}
+			if (!isEntered(node)) {	//不在堆中
+				nodes[size] = node;		//尾插在后面
+				heapIndexMap[node] = size;	//记录下标位置
+				distanceMap[node] = distance;	//记录距离
+				insertHeapify(node, size++);	//调整堆
+			}
+		}
+		
+
+		NodeRecord* pop() {
+			NodeRecord* nodeRecord = new NodeRecord(nodes[0], distanceMap[nodes[0]]);
+			swapPos(0, --size );
+			heapIndexMap[nodes[size]] = -1;	//置为-1，表示此最短距离已确定，今后不再考虑
+			distanceMap.erase(nodes[size]);	//去除已确定的距离
+			//delete(nodes[size]);	//在这里不能delete，nodes指向的是源graph的Node节点，释放后图中就会缺失一个节点
+			nodes[size] = nullptr;	//置空
+			heapify(0, size);	//向下调整堆
+			return nodeRecord;
+		}
+	private:
+		//是否在堆中
+		bool isEntered(Node* node) {	
+			return heapIndexMap.count(node);
+		}
+
+		//node是否在堆中，且有效，是返回true
+		bool inHeap(Node* node) {
+			return isEntered(node) && heapIndexMap[node] != -1;
+		}
+
+		void swapPos(int index1, int index2) {
+			heapIndexMap[nodes[index1]] = index2;
+			heapIndexMap[nodes[index2]] = index1;
+			swap(nodes[index1], nodes[index2]);
+		}
+
+		void insertHeapify(Node* node, int index) {
+			//子比父还要小，交换位置
+			while (distanceMap[nodes[index]] < distanceMap[nodes[(index - 1) / 2]]) {
+				swapPos(index, (index - 1) / 2);
+				index = (index - 1) / 2;
+			}
+		}
+
+		void heapify(int index, int size) {
+			int left = index * 2 + 1;
+			while (left < size) {
+				int smallest = left + 1 < size && distanceMap[nodes[left + 1]] < distanceMap[nodes[left]]
+					? left + 1 : left;
+				smallest = distanceMap[nodes[smallest]] < distanceMap[nodes[index]] ? smallest : index;
+				if (smallest == index) {
+					break;
+				}
+				swapPos(smallest, index);
+				index = smallest;
+				left = index * 2 + 1;
+			}
+
+			
+		}
+
+
+		vector<Node*> nodes;
+		map<Node*, int> heapIndexMap;	//Node*为key,Node*在堆上的位置index为value
+		map<Node*, int> distanceMap;	//Node*到源点的距离
+		int size;
+
+	};
+
+	map<Node*, int> dijkstra2(Node* head,int size) {
+		NodeHeap nodeHeap(size);
+		nodeHeap.addOrUpdateOrIgnore(head, 0);
+		map<Node*, int> result;
+		while (!nodeHeap.isEmpty()) {
+			NodeRecord* record = nodeHeap.pop();
+			Node* cur = record->node;
+			int distance = record->distance;
+			for (auto edge : cur->edges) {
+				nodeHeap.addOrUpdateOrIgnore(edge->to, edge->weight + distance);
+			}
+			result[cur] = distance;
+		}
+		return result;
+
+	}
 };
+
+
+
+//借此复习堆排序
+class HeapSort {
+public:
+	void heapSort1(vector<int>& arr) {
+		if (arr.size() < 2) {
+			return;
+		}
+		for (int i = 0; i < arr.size(); ++i) {
+			heapInsert(arr, i);
+		}
+		int heapSize = arr.size();
+		//mySwap(arr, 0, --heapSize);
+		swap(arr[0], arr[--heapSize]);	//将堆顶元素与堆尾交换，即将最大的数排在了最后，--heapSize,表示最大的数已经排好，缩小排序范围
+		while (heapSize > 0) {	
+			heapify(arr, 0, heapSize);	//换后，向下调整堆,O(logN)
+			swap(arr[0], arr[--heapSize]);	//选出最大
+		}
+	}
+private:
+	//某个数在index位置上，往上继续移动
+	void heapInsert(vector<int>& arr, int index) {
+		while(arr[index] > arr[(index - 1) / 2]) {
+			swap(arr[index], arr[(index - 1) / 2]);
+			index = (index - 1) / 2;
+		}
+	}
+
+	//某个数在index位置，能否往下移动
+	void heapify(vector<int>& arr, int index, int heapSize) {
+		int left = index * 2 + 1;	
+		while (left < heapSize) {
+			//两个孩子中，谁的值大，把下标给largest
+			int largest = left + 1 < heapSize && arr[left + 1] > arr[left] ? left + 1 : left;
+
+			//父和孩子之间，谁的值大，把下标给largest
+			largest = arr[largest] > arr[index] ? largest : index;
+
+			if (largest == index) {
+				break;
+			}
+			swap(arr[largest], arr[index]);
+			index = largest;
+			left = index * 2 + 1;
+		}
+	}
+
+public:
+	void heapSort2(vector<int>& arr) {		//这是另一种常见的写法，效率与1同级，只是在第一次for循环中比1少半循环
+		int n = arr.size();
+		for (int i = n / 2 - 1; i >= 0; --i) {
+			heapify(arr,i,n);
+		}
+		int end=n;
+		while (end > 0) {
+			swap(arr[0], arr[--end]);
+			heapify(arr, 0,end);
+		}
+	}
+
+};
+
+void testHeapSort() {
+	srand(time(0));
+	cout << "test heapSort1:" << endl;
+	vector<int> source1;
+	for (int i = 0; i < 1000000; ++i) {
+		source1.push_back(rand());
+	}
+	vector<int> source2 = source1;
+
+	HeapSort h;
+
+	int begin1 = clock();
+	h.heapSort1(source1);
+	int end1 = clock();
+	cout << "heapSort1 time:" << end1 - begin1 << endl;
+	//for (auto i : source1) {
+	//	cout << i << ' ';
+	//}
+	cout << endl << "test heapSort2:" << endl;
+	begin1 = clock();
+	h.heapSort2(source2);
+	end1 = clock();
+	cout << "heapSort2 time:" << end1 - begin1 << endl;
+	/*for (auto i : source2) {
+		cout << i << ' ';
+	}*/
+}
+int main(void)
+{
+
+	//直接从头到尾构图，麻烦
+	/*
+	Node* head = new Node(0);
+	head->out += 2;
+	head->nexts.push_back(new Node(1));
+	head->nexts.push_back(new Node(2));
+	head->edges.push_back(new Edge(1, head, head->nexts[0]));
+	head->edges.push_back(new Edge(12, head, head->nexts[1]));
+
+	Node* firstOne = head->nexts[0];
+	firstOne->in +=1;
+	firstOne->out += 2;
+	firstOne->nexts.push_back(new Node(2));
+	firstOne->nexts.push_back(new Node(3));
+	firstOne->edges.push_back(new Edge(9, firstOne, firstOne->nexts[0]));
+	firstOne->edges.push_back(new Edge(3, firstOne, firstOne->nexts[1]));
+
+	Node* firstTwo = head->nexts[1];
+	firstTwo->in +=3;
+	firstTwo->out += 1;
+	firstTwo->nexts.push_back(new Node(4));
+	firstTwo->edges.push_back(new Edge(5, firstTwo, firstTwo->nexts[0]));
+
+	Node* secondTwo = firstOne->nexts[1];
+	secondTwo->in += 1;
+	secondTwo->out += 3;
+	secondTwo->nexts.push_back(new Node(2));
+	secondTwo->nexts.push_back(new Node(4));
+	secondTwo->nexts.push_back(new Node(5));
+	secondTwo->edges.push_back(new Edge(4, secondTwo, secondTwo->nexts[0]));
+	secondTwo->edges.push_back(new Edge(13, secondTwo, secondTwo->nexts[1]));
+	secondTwo->edges.push_back(new Edge(15, secondTwo, secondTwo->nexts[1]));*/
+
+	vector<vector<int>> graphInfo;
+	graphInfo.push_back({ 0,1,1 });
+	graphInfo.push_back({ 1,3,3 });
+	graphInfo.push_back({ 3,15,5 });
+	graphInfo.push_back({ 0,12,2 });
+	graphInfo.push_back({ 2,5,4 });
+	graphInfo.push_back({ 4,4,5 });
+	graphInfo.push_back({ 1,9,2 });
+	graphInfo.push_back({ 3,4,2 });
+	graphInfo.push_back({ 3,13,4 });
+	Graph* g= createGraph(graphInfo);
+	//所生成图如图所示https://pics0.baidu.com/feed/14ce36d3d539b600a9e6969e35de7523c65cb703.jpeg?token=bf554ff0861c36f8327b7d75e6c9e670
+	//所建之图正确
+	cout << "testBFS:" << endl;
+	graBFS(g->nodes[0]);	//测试结果正确
+	cout << endl;
+	cout << "testDFS:" << endl;
+	graDFS(g->nodes[0]);	//测试结果正确
+	cout << endl;
+
+	cout << "test dijkstra1:" << endl;
+	Dijkstra d;
+	auto result=d.dijkstra1(g->nodes[0]);		//测试结果正确
+	for (auto res : result) {
+		cout << res.first->value << "-->" << res.second << endl;
+	}
+	cout << "test dijkstra2:" << endl;
+	result = d.dijkstra2(g->nodes[0],6);		//测试结果正确
+	for (auto res : result) {
+		cout << res.first->value << "-->" << res.second << endl;
+	}
+	Node* cur = g->nodes[0];	//查看知，堆上空间已被释放
+	delete(g);
+	g = nullptr;
+
+	//testHeapSort();
+	
+	return 0;
+}
