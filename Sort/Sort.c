@@ -127,7 +127,7 @@ void HeapSort(int* a, int n)
 	//则应该倒着从最后一颗子树开始调（从最后一个非叶子子树开始调）
 	//建堆时间复杂度为O(N)  (N-logN)
 
-	for (int i = (n - 1 - 1) / 2; i >= 0; --i)
+	for (int i = (n - 1 - 1) / 2; i >= 0; --i)	//i=(n-2)/2即可得最后一个非叶子节点，或n/2-1
 	{
 		AdjustDown(a, n, i);
 	}
